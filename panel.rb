@@ -14,6 +14,10 @@ class Panel
   end
 
   def add_prick( x, y )
+    if( x == 0)
+      raise "First row should not contain missing pricks"
+    end
+
     @pricks << [x, y]
   end
 
