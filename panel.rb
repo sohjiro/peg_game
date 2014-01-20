@@ -1,12 +1,16 @@
 class Panel
 
   def initialize( rows, columns )
-    @rows = rows
-    @columns = columns
+
+    if rows % 2 == 0
+      raise "Rows should be odd"
+    end
+
+    @dimentions = [ rows, columns ]
   end
 
   def dimentions
-    [ @rows, @columns ]
+    @dimentions
   end
 
 end
