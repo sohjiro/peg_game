@@ -13,5 +13,13 @@ describe Panel do
     expect { Panel.new(4, COLUMNS) }.to raise_error("Rows should be odd")
   end
 
+  it "should accept missing pricks" do
+    panel = Panel.new(ROWS, COLUMNS)
+    panel.add_prick( 1, 1 )
+    panel.add_prick( 2, 1 )
+    panel.add_prick( 3, 2 )
+    expect(panel.pricks.size()).to eq(3)
+  end
+
 end
 
