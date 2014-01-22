@@ -37,5 +37,13 @@ describe Panel do
     }.to raise_error("First row should not contain missing pricks")
   end
 
+  it "should accept an output column" do
+    panel = Panel.new(ROWS, COLUMNS).add_pricks([1, 1], [2,1]).output_column(1)
+
+    expect(panel).to be_an_instance_of(Panel)
+    expect(panel.pricks.length).to eq(2)
+    expect(panel.out_column).to eq(1)
+  end
+
 end
 
