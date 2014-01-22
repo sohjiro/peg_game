@@ -6,7 +6,7 @@ describe Panel do
 
   it "should accepts the number of rows in the panel" do
     panel = Panel.new(ROWS, COLUMNS)
-    expect(panel.dimentions).to eq([ROWS, COLUMNS])
+    expect(panel).to be_an_instance_of(Panel)
   end
 
   it "should only accepts odd rows" do
@@ -14,17 +14,26 @@ describe Panel do
   end
 
   it "should accept missing pricks" do
-    panel = Panel.new(ROWS, COLUMNS)
-    panel.add_prick( 1, 1 )
-    panel.add_prick( 2, 1 )
-    panel.add_prick( 3, 2 )
-    expect(panel.pricks.size()).to eq(3)
+    panel = Panel.new(ROWS, COLUMNS).add_pricks([1, 1])
+    expect(panel).to be_an_instance_of(Panel)
+    expect(panel.pricks.length).to eq(1)
+  end
+
+  it "should accept multiples missing pricks" do
+    panel = Panel.new(ROWS, COLUMNS).add_pricks([1, 1], [2,1])
+    expect(panel).to be_an_instance_of(Panel)
+    expect(panel.pricks.length).to eq(2)
   end
 
   it "should not allow missing pricks at first row" do
-    panel = Panel.new(ROWS, COLUMNS)
     expect {
-      panel.add_prick( 0, 1 )
+      Panel.new(ROWS, COLUMNS).add_pricks([1, 1], [0,1])
+    }.to raise_error("First row should not contain missing pricks")
+  end
+
+  it "should not allow missing pricks at first row with one value of pricks" do
+    expect {
+      Panel.new(ROWS, COLUMNS).add_pricks([0,1])
     }.to raise_error("First row should not contain missing pricks")
   end
 

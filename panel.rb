@@ -1,28 +1,17 @@
 class Panel
 
-  def initialize( rows, columns )
-    if rows % 2 == 0
-      raise "Rows should be odd"
-    end
+  attr_reader :rows, :columns, :pricks
 
-    @dimentions = [ rows, columns ]
-    @pricks = []
+  def initialize( rows, columns, pricks = [] )
+    raise "Rows should be odd" if rows % 2 == 0
+    @rows = rows
+    @columns = columns
+    @pricks = pricks
   end
 
-  def dimentions
-    @dimentions
-  end
-
-  def add_prick( x, y )
-    if( x == 0)
-      raise "First row should not contain missing pricks"
-    end
-
-    @pricks << [x, y]
-  end
-
-  def pricks
-    @pricks
+  def add_pricks( *pricks )
+    raise "First row should not contain missing pricks" if pricks.assoc(0)
+    self.class.new( self.rows, self.columns, pricks )
   end
 
 end
